@@ -52,7 +52,14 @@
       <DependentUpon>AboutBSM.cs</DependentUpon>
     </Compile>
     <Compile Include="ByteUtilities.cs" />
+    <Compile Include="CopyDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CopyDialog.Designer.cs">
+      <DependentUpon>CopyDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomSSS.cs" />
+    <Compile Include="FileOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StageIDMap.cs" />
     <Compile Include="TempFiles.cs" />
@@ -62,6 +69,9 @@
     <EmbeddedResource Include="AboutBSM.resx">
       <DependentUpon>AboutBSM.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CopyDialog.resx">
+      <DependentUpon>CopyDialog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
