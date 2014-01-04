@@ -60,6 +60,9 @@
     </Compile>
     <Compile Include="CustomSSS.cs" />
     <Compile Include="FileOperations.cs" />
+    <Compile Include="NameDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StageIDMap.cs" />
     <Compile Include="TempFiles.cs" />
@@ -72,6 +75,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CopyDialog.resx">
       <DependentUpon>CopyDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NameDialog.resx">
+      <DependentUpon>NameDialog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
