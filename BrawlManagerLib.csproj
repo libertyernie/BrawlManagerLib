@@ -51,6 +51,7 @@
     <Compile Include="AboutBSM.Designer.cs">
       <DependentUpon>AboutBSM.cs</DependentUpon>
     </Compile>
+    <Compile Include="BitmapUtilities.cs" />
     <Compile Include="ByteUtilities.cs" />
     <Compile Include="CopyDialog.cs">
       <SubType>Form</SubType>
