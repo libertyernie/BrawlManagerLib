@@ -19,7 +19,14 @@ namespace BrawlManagerLib {
 			}
 		}
 
-		public static Song[] arr = {
+		public static IEnumerable<Song> Songs {
+			get {
+				return from s in arr
+					   select s;
+			}
+		}
+
+		private static Song[] arr = {
 			new Song("", "", 0xFFFF, null),
 			new Song("Super Smash Bros. Brawl Main Theme", "X01", 0x26F9, 0),
 			new Song("Menu 1", "X02", 0x26FA, 111),
