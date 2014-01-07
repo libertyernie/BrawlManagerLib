@@ -70,10 +70,10 @@ namespace BrawlManagerLib {
 		public static ReadOnlyCollection<Stage> Stages { get; private set; }
 		public static ReadOnlyCollection<KeyValuePair<byte, string>> StagesByID { get; private set; }
 
-		public static CustomSSS ManualSSS, AutoSSS, DefaultSSS;
+		public static CustomSSS AutoSSS, DefaultSSS;
 		public static CustomSSS BestSSS {
 			get {
-				return ManualSSS ?? AutoSSS ?? DefaultSSS;
+				return AutoSSS ?? DefaultSSS;
 			}
 		}
 
