@@ -70,13 +70,6 @@ namespace BrawlManagerLib {
 		public static ReadOnlyCollection<Stage> Stages { get; private set; }
 		public static ReadOnlyCollection<KeyValuePair<byte, string>> StagesByID { get; private set; }
 
-		public static CustomSSS AutoSSS, DefaultSSS;
-		public static CustomSSS BestSSS {
-			get {
-				return AutoSSS ?? DefaultSSS;
-			}
-		}
-
 		static StageIDMap() {
 			// static initializer
 			#region Arrays containing stage data
@@ -150,63 +143,11 @@ namespace BrawlManagerLib {
 				if (pac != null) byID.Add(new KeyValuePair<byte, string>(b, pac.ToUpper()));
 			}
 			StagesByID = byID.AsReadOnly();
-
-			#region default sss
-			string s = @"Pretty generic custom SSS (based on CEP 5.5)
-* 046B8F5C 7C802378
-* 046B8F64 7C6300AE
-* 040AF618 5460083C
-* 040AF68C 38840002
-* 040AF6AC 5463083C
-* 040AF6C0 88030001
-* 040AF6E8 3860FFFF
-* 040AF59C 3860000C
-* 060B91C8 00000018
-* BFA10014 7CDF3378
-* 7CBE2B78 7C7D1B78
-* 2D05FFFF 418A0014
-* 006B929C 00000027
-* 066B99D8 00000027
-* 00010203 04050709
-* 080A0B0C 0D0E0F10
-* 11141516 1A191217
-* 0618131D 1E1B1C1F
-* 20212223 24252600
-* 006B92A4 00000027
-* 066B9A58 00000027
-* 27282A2B 2C2D2E2F
-* 30313233 34353637
-* 38393A3B 3C3D3E3F
-* 40414243 44454647
-* 48494A4B 4C4D4E00
-* 06407AAC 0000009E
-* 01010202 03030404
-* 05050606 07070808
-* 0909330A 0B0B0C0C
-* 0D0D0E0E 130F1410
-* 15111612 17131814
-* 19151C16 1D171E18
-* 1F19201A 211B221C
-* 231D241E 251F2932
-* 2A332B34 2C352D36
-* 2F373038 3139323A
-* 2E3BFFFF 40204121
-* 42224323 44244525
-* 46264727 48284929
-* 4A2A4B2B 4C2C4D2D
-* 4E2E4F2F 50305131
-* 523D533E 543F5540
-* 56415742 58435944
-* 5A455B46 5C475D48
-* 5E495F4A 604B614C
-* 624D634E 644F0000";
-			DefaultSSS = new CustomSSS(s.Split('\n'));
-			#endregion
 		}
 
-		public static List<string> PacFilesBySSSOrder() {
+		public static List<string> PacFilesBySSSOrder(CustomSSS sss) {
 			List<string> list = new List<string>();
-			foreach (int stage_id in BestSSS.StageIDsInOrder) {
+			foreach (int stage_id in sss.StageIDsInOrder) {
 				if (stage_id >= 0x40) {
 					list.Add("STGCUSTOM" + (stage_id - 0x3F).ToString("X2") + ".pac");
 				} else {
@@ -221,7 +162,7 @@ namespace BrawlManagerLib {
 			return list;
 		}
 
-		public static int IconForPac(string filename) {
+		public static int StageIDForPac(string filename) {
 			int stageID = -1;
 			if (filename.StartsWith("STGCUSTOM", StringComparison.InvariantCultureIgnoreCase)) {
 				stageID = Convert.ToInt32(filename.Substring(9, 2), 16) + 0x3F;
@@ -238,7 +179,7 @@ namespace BrawlManagerLib {
 				}
 				stageID = q.First();
 			}
-			return BestSSS.IconForStage(stageID);
+			return stageID;
 		}
 
 		public static string PacBasenameForStageID(int stageID) {
@@ -251,11 +192,6 @@ namespace BrawlManagerLib {
 				if (!q.Any()) return null;
 				return q.First();
 			}
-		}
-
-		public static string PacBasenameForIcon(int iconID) {
-			int stageID = BestSSS.StageForIcon(iconID);
-			return PacBasenameForStageID(stageID);
 		}
 
 		public static string RelNameForPac(string filename) {
@@ -320,7 +256,7 @@ namespace BrawlManagerLib {
 			58, // Brinstar
 			59, // Pokemon Stadium
 		};
-		public static int selmapIcon(int selcharacter2Icon) {
+		public static int sssPositionForSelcharacter2Icon(int selcharacter2Icon) {
 			int index = -1;
 			for (int i = 0; i < sc_selcharacter2_icon_from_sss3_index.Length; i++) {
 				if (sc_selcharacter2_icon_from_sss3_index[i] == selcharacter2Icon) {
@@ -328,7 +264,7 @@ namespace BrawlManagerLib {
 					break;
 				}
 			}
-			return BestSSS[index].Item2;
+			return index;
 		}
 		#endregion
 	}
