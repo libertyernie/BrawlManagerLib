@@ -52,6 +52,7 @@
       <DependentUpon>AboutBSM.cs</DependentUpon>
     </Compile>
     <Compile Include="BitmapUtilities.cs" />
+    <Compile Include="CustomSSSwithSDSL.cs" />
     <Compile Include="Song.cs" />
     <Compile Include="ByteUtilities.cs" />
     <Compile Include="CopyDialog.cs">
