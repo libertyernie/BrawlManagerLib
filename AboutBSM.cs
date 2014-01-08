@@ -20,7 +20,12 @@ namespace BrawlManagerLib {
 				software_title.Text = ((AssemblyTitleAttribute)a.GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0]).Title;
 				version.Text = a.GetName().Version.ToString();
 				copyright.Text = ((AssemblyCopyrightAttribute)a.GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false)[0]).Copyright;
-				brawllib.Text = a.FullName;
+
+				Assembly b = Assembly.GetAssembly(this.GetType());
+				library_title.Text = ((AssemblyTitleAttribute)b.GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0]).Title;
+				library_version.Text = b.GetName().Version.ToString();
+				library_copyright.Text = ((AssemblyCopyrightAttribute)b.GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false)[0]).Copyright;
+
 				Assembly dll = Assembly.GetAssembly(typeof(BrawlLib.StringTable));
 				brawllib.Text = "Using " +
 					((AssemblyTitleAttribute)dll.GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0]).Title + "\r\n" +
