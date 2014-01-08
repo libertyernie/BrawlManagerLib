@@ -13,8 +13,8 @@ namespace BrawlManagerLib {
 			string p = Path.Combine(Path.GetTempPath(), "StageManager");
 			if (Directory.Exists(p)) {
 				Directory.Delete(p, true);
-				Directory.CreateDirectory(p);
 			}
+			Directory.CreateDirectory(p);
 		}
 
 		public static string Create() {
