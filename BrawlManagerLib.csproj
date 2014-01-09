@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BrawlLib">
-      <HintPath>..\..\BrawlLib.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -52,6 +49,9 @@
       <DependentUpon>AboutBSM.cs</DependentUpon>
     </Compile>
     <Compile Include="BitmapUtilities.cs" />
+    <Compile Include="CollapsibleSplitter.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CustomSSSwithSDSL.cs" />
     <Compile Include="Song.cs" />
     <Compile Include="ByteUtilities.cs" />
@@ -84,6 +84,12 @@
     <EmbeddedResource Include="NameDialog.resx">
       <DependentUpon>NameDialog.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\brawltools2\BrawlLib\BrawlLib.csproj">
+      <Project>{462d0bbf-ce82-405b-8848-2f91e9e14c55}</Project>
+      <Name>BrawlLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
