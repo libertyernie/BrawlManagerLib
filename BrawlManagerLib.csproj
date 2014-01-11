@@ -83,6 +83,12 @@
     </Compile>
     <Compile Include="StageIDMap.cs" />
     <Compile Include="TempFiles.cs" />
+    <Compile Include="TextBoxDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TextBoxDialog.Designer.cs">
+      <DependentUpon>TextBoxDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="TextureContainer.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +107,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Songs\SongPanel.resx">
       <DependentUpon>SongPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextBoxDialog.resx">
+      <DependentUpon>TextBoxDialog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -30,6 +30,9 @@
 			this.brawllib = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.panel2 = new System.Windows.Forms.Panel();
+			this.panel5 = new System.Windows.Forms.Panel();
+			this.splitter = new System.Windows.Forms.Label();
+			this.viewMspl = new System.Windows.Forms.Button();
 			this.panel3 = new System.Windows.Forms.Panel();
 			this.copyright = new System.Windows.Forms.Label();
 			this.panel4 = new System.Windows.Forms.Panel();
@@ -37,6 +40,7 @@
 			this.library_title = new System.Windows.Forms.Label();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
+			this.panel5.SuspendLayout();
 			this.panel3.SuspendLayout();
 			this.panel4.SuspendLayout();
 			this.SuspendLayout();
@@ -110,11 +114,43 @@
 			this.panel2.Controls.Add(this.textBox1);
 			this.panel2.Controls.Add(this.brawllib);
 			this.panel2.Controls.Add(this.library_copyright);
+			this.panel2.Controls.Add(this.panel5);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel2.Location = new System.Drawing.Point(0, 57);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(392, 176);
+			this.panel2.Size = new System.Drawing.Size(392, 208);
 			this.panel2.TabIndex = 6;
+			// 
+			// panel5
+			// 
+			this.panel5.Controls.Add(this.splitter);
+			this.panel5.Controls.Add(this.viewMspl);
+			this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.panel5.Location = new System.Drawing.Point(0, 176);
+			this.panel5.Name = "panel5";
+			this.panel5.Size = new System.Drawing.Size(392, 32);
+			this.panel5.TabIndex = 7;
+			// 
+			// splitter
+			// 
+			this.splitter.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.splitter.Location = new System.Drawing.Point(0, 0);
+			this.splitter.Name = "splitter";
+			this.splitter.Size = new System.Drawing.Size(317, 32);
+			this.splitter.TabIndex = 6;
+			this.splitter.Text = "splitter";
+			this.splitter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// viewMspl
+			// 
+			this.viewMspl.Dock = System.Windows.Forms.DockStyle.Right;
+			this.viewMspl.Location = new System.Drawing.Point(317, 0);
+			this.viewMspl.Name = "viewMspl";
+			this.viewMspl.Size = new System.Drawing.Size(75, 32);
+			this.viewMspl.TabIndex = 7;
+			this.viewMspl.Text = "View MS-PL";
+			this.viewMspl.UseVisualStyleBackColor = true;
+			this.viewMspl.Click += new System.EventHandler(this.viewMspl_Click);
 			// 
 			// panel3
 			// 
@@ -172,7 +208,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(392, 233);
+			this.ClientSize = new System.Drawing.Size(392, 265);
 			this.Controls.Add(this.panel2);
 			this.Controls.Add(this.panel4);
 			this.Controls.Add(this.panel3);
@@ -183,6 +219,7 @@
 			this.panel1.PerformLayout();
 			this.panel2.ResumeLayout(false);
 			this.panel2.PerformLayout();
+			this.panel5.ResumeLayout(false);
 			this.panel3.ResumeLayout(false);
 			this.panel3.PerformLayout();
 			this.panel4.ResumeLayout(false);
@@ -205,5 +242,8 @@
 		private System.Windows.Forms.Panel panel4;
 		private System.Windows.Forms.Label library_version;
 		private System.Windows.Forms.Label library_title;
+		private System.Windows.Forms.Label splitter;
+		private System.Windows.Forms.Panel panel5;
+		private System.Windows.Forms.Button viewMspl;
 	}
 }
