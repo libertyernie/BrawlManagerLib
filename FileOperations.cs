@@ -25,6 +25,9 @@ namespace BrawlManagerLib {
 		}
 
 		public static bool Rename(string path1, string path2) {
+			if (string.Equals(path1, path2, StringComparison.InvariantCultureIgnoreCase)) {
+				return true;
+			}
 			if (File.Exists(path2)) {
 				using (CopyDialog dialog = new CopyDialog(path2, path1) { Text = "Move" }) {
 					DialogResult r = dialog.ShowDialog();
