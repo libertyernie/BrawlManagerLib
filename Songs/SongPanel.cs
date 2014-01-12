@@ -45,6 +45,7 @@ namespace BrawlManagerLib {
 				return _rootPath != null;
 			}
 		}
+		public string LastFileCalledFor { get; private set; }
 
 		public SongPanel() {
 			InitializeComponent();
@@ -70,6 +71,7 @@ namespace BrawlManagerLib {
 			songNameBar.Index = -1;
 		}
 		public void Open(FileInfo fi) {
+			LastFileCalledFor = fi.FullName;
 			if (!fi.Exists) {
 				Close();
 				return;
@@ -151,7 +153,7 @@ namespace BrawlManagerLib {
 		}
 
 		private void SongPanel_DragEnter(object sender, DragEventArgs e) {
-			if (FileOpen && e.Data.GetDataPresent(DataFormats.FileDrop)) { // Must be a file
+			if (e.Data.GetDataPresent(DataFormats.FileDrop)) { // Must be a file
 				string[] s = (string[])e.Data.GetData(DataFormats.FileDrop);
 				if (s.Length == 1) { // Can only drag and drop one file
 					string filename = s[0].ToLower();
@@ -170,10 +172,9 @@ namespace BrawlManagerLib {
 					_rootNode.Dispose(); // Close the file before overwriting it!
 					_rootNode = null;
 				}
-				copyBrstm(filepath, _rootPath);
-				Open(new FileInfo(_rootPath));
-				//refreshDirectory();
 			}
+			copyBrstm(filepath, LastFileCalledFor);
+			Open(new FileInfo(LastFileCalledFor));
 		}
 
 		/// <summary>
