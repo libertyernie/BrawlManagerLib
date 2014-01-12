@@ -43,12 +43,10 @@ namespace BrawlManagerLib {
 		}
 
 		private void viewMspl_Click(object sender, EventArgs e) {
-			string license = @"This license governs use of the accompanying software. If you use the software, you
-accept this license. If you do not accept the license, do not use the software.
+			string license = @"This license governs use of the accompanying software. If you use the software, you accept this license. If you do not accept the license, do not use the software.
 
 1. Definitions
-The terms ""reproduce,"" ""reproduction,"" ""derivative works,"" and ""distribution"" have the
-same meaning here as under U.S. copyright law.
+The terms ""reproduce,"" ""reproduction,"" ""derivative works,"" and ""distribution"" have the same meaning here as under U.S. copyright law.
 A ""contribution"" is the original software, or any additions or changes to the software.
 A ""contributor"" is any person that distributes its contribution under this license.
 ""Licensed patents"" are a contributor's patent claims that read directly on its contribution.
@@ -63,6 +61,8 @@ A ""contributor"" is any person that distributes its contribution under this lic
 (C) If you distribute any portion of the software, you must retain all copyright, patent, trademark, and attribution notices that are present in the software.
 (D) If you distribute any portion of the software in source code form, you may do so only under this license by including a complete copy of this license with your distribution. If you distribute any portion of the software in compiled or object code form, you may only do so under a license that complies with this license.
 (E) The software is licensed ""as-is."" You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
+
+---
 
 http://www.codeproject.com/Articles/3025/Collapsible-Splitter-control-in-C";
 			TextBoxDialog.ShowDialog(license, "Microsoft Public License");
