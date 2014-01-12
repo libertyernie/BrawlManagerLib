@@ -5,6 +5,7 @@ using BrawlLib.SSBB.ResourceNodes;
 using System.IO;
 using BrawlManagerLib;
 using System.Audio;
+using System.ComponentModel;
 
 namespace BrawlManagerLib {
 	public partial class SongPanel : UserControl {
@@ -17,8 +18,22 @@ namespace BrawlManagerLib {
 		/// </summary>
 		private string _rootPath;
 
-		public bool LoadNames;
-		public bool LoadBrstms;
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+		[DefaultValue(true)]
+		public bool LoadNames { get; set; }
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+		[DefaultValue(true)]
+		public bool LoadBrstms { get; set; }
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+		[DefaultValue(true)]
+		public bool ShowPropertyGrid {
+			get {
+				return grid.Visible;
+			}
+			set {
+				grid.Visible = value;
+			}
+		}
 
 		public string RootPath {
 			get {
@@ -33,6 +48,9 @@ namespace BrawlManagerLib {
 
 		public SongPanel() {
 			InitializeComponent();
+
+			LoadNames = true;
+			LoadBrstms = true;
 
 			AllowDrop = true;
 			this.DragEnter += SongPanel_DragEnter;
@@ -52,6 +70,11 @@ namespace BrawlManagerLib {
 			songNameBar.Index = -1;
 		}
 		public void Open(FileInfo fi) {
+			if (!fi.Exists) {
+				Close();
+				return;
+			}
+
 			if (_rootNode != null) {
 				_rootNode.Dispose();
 				_rootNode = null;
@@ -128,7 +151,7 @@ namespace BrawlManagerLib {
 		}
 
 		private void SongPanel_DragEnter(object sender, DragEventArgs e) {
-			if (e.Data.GetDataPresent(DataFormats.FileDrop)) { // Must be a file
+			if (FileOpen && e.Data.GetDataPresent(DataFormats.FileDrop)) { // Must be a file
 				string[] s = (string[])e.Data.GetData(DataFormats.FileDrop);
 				if (s.Length == 1) { // Can only drag and drop one file
 					string filename = s[0].ToLower();
