@@ -162,20 +162,17 @@ namespace BrawlManagerLib {
 		/// </summary>
 		public void save() {
 			if (IsDirty) {
-				DialogResult res = MessageBox.Show("Overwrite info.pac" + (info_training == null ? "" : " and info_training.pac") + "?", "Saving", MessageBoxButtons.YesNo);
-				if (res == DialogResult.Yes) {
-					updateNodeString();
-					info.Rebuild();
-					(info_pac ?? info).Merge();
-					(info_pac ?? info).Export(_currentFile);
-					if (info_training != null) {
-						info_training.Rebuild();
-						info_training_pac.Merge();
-						info_training_pac.Export(_currentTrainingFile);
-					}
-					modifiedStringIndices.Clear();
-					copyIntoFileStrings();
+				updateNodeString();
+				info.Rebuild();
+				(info_pac ?? info).Merge();
+				(info_pac ?? info).Export(_currentFile);
+				if (info_training != null) {
+					info_training.Rebuild();
+					info_training_pac.Merge();
+					info_training_pac.Export(_currentTrainingFile);
 				}
+				modifiedStringIndices.Clear();
+				copyIntoFileStrings();
 			}
 		}
 
@@ -189,7 +186,8 @@ namespace BrawlManagerLib {
 
 		private void textBox1_KeyPress(object sender, KeyPressEventArgs e) {
 			if (e.KeyChar == (char)Keys.Enter) {
-				save();
+				DialogResult res = MessageBox.Show("Overwrite info.pac" + (info_training == null ? "" : " and info_training.pac") + "?", "Saving", MessageBoxButtons.YesNo);
+				if (res == DialogResult.Yes) save();
 			}
 		}
 
