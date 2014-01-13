@@ -26,8 +26,8 @@
 			this.grid = new System.Windows.Forms.PropertyGrid();
 			this.app = new System.Windows.Forms.AudioPlaybackPanel();
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.lblFilename = new System.Windows.Forms.Label();
 			this.songNameBar = new BrawlManagerLib.SongNameBar();
+			this.lblFilename = new System.Windows.Forms.Label();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -59,24 +59,24 @@
 			this.panel1.Size = new System.Drawing.Size(300, 20);
 			this.panel1.TabIndex = 3;
 			// 
-			// lblFilename
-			// 
-			this.lblFilename.Dock = System.Windows.Forms.DockStyle.Left;
-			this.lblFilename.Location = new System.Drawing.Point(0, 0);
-			this.lblFilename.Name = "lblFilename";
-			this.lblFilename.Size = new System.Drawing.Size(34, 20);
-			this.lblFilename.TabIndex = 3;
-			this.lblFilename.Text = "MMM";
-			this.lblFilename.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
 			// songNameBar
 			// 
 			this.songNameBar.Dock = System.Windows.Forms.DockStyle.Top;
 			this.songNameBar.Index = 0;
-			this.songNameBar.Location = new System.Drawing.Point(34, 0);
+			this.songNameBar.Location = new System.Drawing.Point(26, 0);
 			this.songNameBar.Name = "songNameBar";
-			this.songNameBar.Size = new System.Drawing.Size(266, 20);
+			this.songNameBar.Size = new System.Drawing.Size(274, 20);
 			this.songNameBar.TabIndex = 2;
+			// 
+			// lblFilename
+			// 
+			this.lblFilename.Dock = System.Windows.Forms.DockStyle.Left;
+			this.lblFilename.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblFilename.Location = new System.Drawing.Point(0, 0);
+			this.lblFilename.Name = "lblFilename";
+			this.lblFilename.Size = new System.Drawing.Size(26, 20);
+			this.lblFilename.TabIndex = 3;
+			this.lblFilename.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// SongPanel
 			// 
