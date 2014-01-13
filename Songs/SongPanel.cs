@@ -87,19 +87,17 @@ namespace BrawlManagerLib {
 			LastFileCalledFor = fi.FullName;
 			lblFilename.Text = Path.GetFileNameWithoutExtension(LastFileCalledFor);
 
-			if (!fi.Exists) {
-				Close();
-				return;
-			}
-
 			if (_rootNode != null) {
 				_rootNode.Dispose();
 				_rootNode = null;
 			}
-			_rootPath = fi.FullName;
-			_rootNode = NodeFactory.FromFile(null, _rootPath);
+
+			if (fi.Exists) {
+				_rootPath = fi.FullName;
+				_rootNode = NodeFactory.FromFile(null, _rootPath);
+			}
 			if (LoadNames) {
-				string filename = Path.GetFileNameWithoutExtension(_rootPath).ToUpper();
+				string filename = Path.GetFileNameWithoutExtension(LastFileCalledFor).ToUpper();
 				int index = (from s in SongIDMap.Songs
 							 where s.Filename == filename
 							 select s.InfoPacIndex ?? -1)
