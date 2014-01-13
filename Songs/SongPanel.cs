@@ -34,6 +34,16 @@ namespace BrawlManagerLib {
 				grid.Visible = value;
 			}
 		}
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+		[DefaultValue(false)]
+		public bool ShowFilename {
+			get {
+				return lblFilename.Visible;
+			}
+			set {
+				lblFilename.Visible = value;
+			}
+		}
 
 		public string RootPath {
 			get {
@@ -52,6 +62,8 @@ namespace BrawlManagerLib {
 
 			LoadNames = true;
 			LoadBrstms = true;
+			ShowPropertyGrid = true;
+			ShowFilename = false;
 
 			AllowDrop = true;
 			this.DragEnter += SongPanel_DragEnter;
@@ -68,10 +80,13 @@ namespace BrawlManagerLib {
 			grid.SelectedObject = null;
 			app.TargetSource = null;
 			app.Enabled = grid.Enabled = false;
+			lblFilename.Text = "";
 			songNameBar.Index = -1;
 		}
 		public void Open(FileInfo fi) {
 			LastFileCalledFor = fi.FullName;
+			lblFilename.Text = Path.GetFileNameWithoutExtension(LastFileCalledFor);
+
 			if (!fi.Exists) {
 				Close();
 				return;
