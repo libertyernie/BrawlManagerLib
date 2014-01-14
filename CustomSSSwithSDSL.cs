@@ -11,6 +11,9 @@ namespace BrawlManagerLib {
 		public CustomSSSwithSDSL(byte[] data) : base(data) {
 			SongsByStage = SDSLScanner.SongsByStage(this);
 		}
+		public CustomSSSwithSDSL(string filename) : base(filename) {
+			SongsByStage = SDSLScanner.SongsByStage(this);
+		}
 
 		public Dictionary<byte, Song> SongsByStage { get; private set; }
 	}
