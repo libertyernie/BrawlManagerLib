@@ -125,10 +125,10 @@ namespace BrawlManagerLib {
 				MessageBox.Show("No custom SSS code found. A default code will be used.");
 				DataBefore = data.ToArray();
 				sss1 = ByteUtilities.StringToByteArray("00010203 04050709 080A0B0C 0D0E0F10 11141516 1A191217 0618131D 1E1B1C00");
-				sss2 = ByteUtilities.StringToByteArray("1F202122 23242526 27280000 00000000");
+				sss2 = ByteUtilities.StringToByteArray("1F202122 23242526 2728");
 				sss3 = ByteUtilities.StringToByteArray("01010202 03030404 05050606 07070808 0909330A 0B0B0C0C 0D0D0E0E 130F1410 " +
 													   "15111612 17131814 19151C16 1D171E18 1F19201A 211B221C 231D241E 251F2932 " +
-													   "15111612 2A332B34 2C352D36 2F373038 3139323A 2E3BFFFF 00000000");
+													   "15111612 2A332B34 2C352D36 2F373038 3139323A 2E3BFFFF");
 				DataAfter = new byte[0];
 				return;
 			}
