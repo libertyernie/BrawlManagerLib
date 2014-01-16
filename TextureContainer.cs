@@ -64,18 +64,20 @@ namespace BrawlManagerLib {
 		}
 
 		private void populate(out Texture tex, string path) {
-			tex = new Texture();
+			tex = new Texture() {
+				tex0 = null,
+				ForThisFrameIndex = false,
+				pat0 = null,
+			};
+			if (iconNum == 255) return;
+
 			var query = (from n in PAT0Folder.FindChild(path, false).Children[0].Children
 						 let p = ((PAT0TextureEntryNode)n)
 						 orderby p.FrameIndex descending
 						 where p != null
 						 && p.FrameIndex <= iconNum
 						 select p);
-			if (!query.Any()) {
-				tex.tex0 = null;
-				tex.ForThisFrameIndex = false;
-				tex.pat0 = null;
-			} else {
+			if (query.Any()) {
 				var first = query.First();
 				tex.tex0 = TEX0Folder.FindChild(first.Name, false) as TEX0Node;
 				tex.ForThisFrameIndex = (first.FrameIndex == iconNum);
