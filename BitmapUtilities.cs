@@ -74,6 +74,16 @@ namespace BrawlManagerLib {
 			return TextureConverterDialog.ResizeImage(orig, resizeTo.Width, resizeTo.Height);
 		}
 
+		public static Bitmap Border(Bitmap orig, Color color, int penwidth = 1) {
+			Bitmap b = new Bitmap(orig.Width, orig.Height);
+			Graphics g = Graphics.FromImage(b);
+			g.DrawImage(orig, 0, 0);
+			g.DrawRectangle(new Pen(color, penwidth),
+				penwidth - 1, penwidth - 1,
+				orig.Width - penwidth, orig.Height - penwidth);
+			return b;
+		}
+
 		/// <summary>
 		/// Checks if the given bitmap is a single color. If the result is true, its color will be stored in the second parameter.
 		/// </summary>
