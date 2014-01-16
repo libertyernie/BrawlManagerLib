@@ -6,24 +6,37 @@ using System.Text;
 
 namespace BrawlManagerLib {
 	public class TextureContainer : IEnumerable<TEX0Node> {
-		public TEX0Node prevbase_tex0;
-		public TEX0Node icon_tex0;
-		public TEX0Node frontstname_tex0;
-		public TEX0Node seriesicon_tex0;
-		public TEX0Node selmap_mark_tex0;
+		public class Texture {
+			public TEX0Node tex0;
+			public PAT0TextureEntryNode pat0;
+			public bool ForThisFrameIndex;
+		}
 
-		public PAT0TextureEntryNode prevbase_pat0;
-		public PAT0TextureEntryNode icon_pat0;
-		public PAT0TextureEntryNode frontstname_pat0;
-		public PAT0TextureEntryNode seriesicon_pat0;
-		public PAT0TextureEntryNode selmap_mark_pat0;
+		public Texture prevbase;
+		public Texture icon;
+		public Texture frontstname;
+		public Texture seriesicon;
+		public Texture selmap_mark;
+
+		#region Backwards-compatibility - depreciated
+		public TEX0Node prevbase_tex0 { get { return prevbase.ForThisFrameIndex ? prevbase.tex0 : null; } }
+		public TEX0Node icon_tex0 { get { return icon.ForThisFrameIndex ? icon.tex0 : null; } }
+		public TEX0Node frontstname_tex0 { get { return frontstname.ForThisFrameIndex ? frontstname.tex0 : null; } }
+		public TEX0Node seriesicon_tex0 { get { return seriesicon.ForThisFrameIndex ? seriesicon.tex0 : null; } }
+		public TEX0Node selmap_mark_tex0 { get { return selmap_mark.ForThisFrameIndex ? selmap_mark.tex0 : null; } }
+		public PAT0TextureEntryNode prevbase_pat0 { get { return prevbase.pat0; } }
+		public PAT0TextureEntryNode icon_pat0 { get { return icon.pat0; } }
+		public PAT0TextureEntryNode frontstname_pat0 { get { return frontstname.pat0; } }
+		public PAT0TextureEntryNode seriesicon_pat0 { get { return seriesicon.pat0; } }
+		public PAT0TextureEntryNode selmap_mark_pat0 { get { return selmap_mark.pat0; } }
+		#endregion
 
 		public ResourceNode TEX0Folder {get; private set;}
 		private ResourceNode PAT0Folder;
 		private int iconNum;
 
 		public IEnumerator<TEX0Node> GetEnumerator() {
-			return new List<TEX0Node> { prevbase_tex0, icon_tex0, frontstname_tex0, seriesicon_tex0, selmap_mark_tex0 }.GetEnumerator();
+			return new List<TEX0Node> { prevbase.tex0, icon.tex0, frontstname.tex0, seriesicon.tex0, selmap_mark.tex0 }.GetEnumerator();
 		}
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() {
 			return GetEnumerator();
@@ -43,24 +56,30 @@ namespace BrawlManagerLib {
 					  ?? node.FindChild("AnmTexPat(NW4R)", false);
 			this.iconNum = iconNum;
 
-			populate(out prevbase_tex0, out prevbase_pat0, "MenSelmapPreview/basebgM");
-			populate(out icon_tex0, out icon_pat0, "MenSelmapIcon/iconM");
-			populate(out frontstname_tex0, out frontstname_pat0, "MenSelmapPreview/pasted__stnameM"); // the name shadow has a separate pat0 list
-			populate(out seriesicon_tex0, out seriesicon_pat0, "MenSelmapPreview/lambert113");
-			populate(out selmap_mark_tex0, out selmap_mark_pat0, "MenSelmapPreview/pasted__stnamelogoM");
+			populate(out prevbase, "MenSelmapPreview/basebgM");
+			populate(out icon, "MenSelmapIcon/iconM");
+			populate(out frontstname, "MenSelmapPreview/pasted__stnameM"); // the name shadow has a separate pat0 list
+			populate(out seriesicon, "MenSelmapPreview/lambert113");
+			populate(out selmap_mark, "MenSelmapPreview/pasted__stnamelogoM");
 		}
 
-		private void populate(out TEX0Node tex0node, out PAT0TextureEntryNode pat0node, string path) {
+		private void populate(out Texture tex, string path) {
+			tex = new Texture();
 			var query = (from n in PAT0Folder.FindChild(path, false).Children[0].Children
-						 where n is PAT0TextureEntryNode
-						 && ((PAT0TextureEntryNode)n).FrameIndex == iconNum
-						 select ((PAT0TextureEntryNode)n));
+						 let p = ((PAT0TextureEntryNode)n)
+						 orderby p.FrameIndex descending
+						 where p != null
+						 && p.FrameIndex <= iconNum
+						 select p);
 			if (!query.Any()) {
-				pat0node = null;
-				tex0node = null;
+				tex.tex0 = null;
+				tex.ForThisFrameIndex = false;
+				tex.pat0 = null;
 			} else {
-				pat0node = query.First();
-				tex0node = TEX0Folder.FindChild(pat0node.Name, false) as TEX0Node;
+				var first = query.First();
+				tex.tex0 = TEX0Folder.FindChild(first.Name, false) as TEX0Node;
+				tex.ForThisFrameIndex = (first.FrameIndex == iconNum);
+				tex.pat0 = tex.ForThisFrameIndex ? first : null;
 			}
 		}
 	}
