@@ -20,6 +20,10 @@ namespace BrawlManagerLib {
 					}
 				}
 			}
+			string dir = Path.GetDirectoryName(path2);
+			if (!Directory.Exists(dir)) {
+				Directory.CreateDirectory(dir);
+			}
 			File.Copy(path1, path2, true);
 			return true;
 		}
