@@ -150,6 +150,16 @@ namespace BrawlManagerLib {
 				Close();
 			}
 		}
+		public void Replace(string filepath) {
+			if (FileOpen) {
+				if (_rootNode != null) {
+					_rootNode.Dispose(); // Close the file before overwriting it!
+					_rootNode = null;
+				}
+			}
+			copyBrstm(filepath, LastFileCalledFor);
+			Open(new FileInfo(LastFileCalledFor));
+		}
 
 		public string findInfoFile() {
 			return songNameBar.findInfoFile();
@@ -180,14 +190,7 @@ namespace BrawlManagerLib {
 		private void SongPanel_DragDrop(object sender, DragEventArgs e) {
 			string[] s = (string[])e.Data.GetData(DataFormats.FileDrop);
 			string filepath = s[0].ToLower();
-			if (FileOpen) {
-				if (_rootNode != null) {
-					_rootNode.Dispose(); // Close the file before overwriting it!
-					_rootNode = null;
-				}
-			}
-			copyBrstm(filepath, LastFileCalledFor);
-			Open(new FileInfo(LastFileCalledFor));
+			Replace(filepath);
 		}
 
 		/// <summary>
