@@ -11,7 +11,7 @@ namespace BrawlManagerLib {
 	///  A modification of David Amenta's RecycleBin code
 	/// </summary>
 	public static class FileOperations {
-		public static bool Copy(string path1, string path2) {
+		public static bool Copy(string path1, string path2, bool deleteFirst = false) {
 			if (File.Exists(path2)) {
 				using (CopyDialog dialog = new CopyDialog(path2, path1) { Text = "Copy" }) {
 					DialogResult r = dialog.ShowDialog();
@@ -24,6 +24,7 @@ namespace BrawlManagerLib {
 			if (!Directory.Exists(dir)) {
 				Directory.CreateDirectory(dir);
 			}
+			if (deleteFirst) File.Delete(path2);
 			File.Copy(path1, path2, true);
 			return true;
 		}

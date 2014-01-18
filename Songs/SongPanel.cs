@@ -200,7 +200,7 @@ namespace BrawlManagerLib {
 		/// <param name="dest">the output BRSTM path</param>
 		public static void copyBrstm(string src, string dest) {
 			if (src.EndsWith(".brstm")) {
-				FileOperations.Copy(src, dest); // Use FileOperations (calls Windows shell -> asks for confirmation to overwrite)
+				FileOperations.Copy(src, dest, deleteFirst:true);
 			} else {
 				BrstmConverterDialog bcd = new BrstmConverterDialog();
 				bcd.AudioSource = src;
